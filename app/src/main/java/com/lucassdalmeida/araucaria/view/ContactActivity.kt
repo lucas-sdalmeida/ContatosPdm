@@ -16,7 +16,9 @@ class ContactActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(contactActivityViewBinding.root)
+        setSupportActionBar(contactActivityViewBinding.toolbarIn.toolbar)
 
+        supportActionBar?.let{ it.subtitle = "Contact details" }
         val saveBt = contactActivityViewBinding.saveBt
 
         with(contactActivityViewBinding) {

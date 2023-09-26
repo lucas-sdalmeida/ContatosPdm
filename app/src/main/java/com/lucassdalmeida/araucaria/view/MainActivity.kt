@@ -29,9 +29,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activityMainBinding.root)
+        setSupportActionBar(activityMainBinding.toolbarIn.toolbar)
 
         val contactsListView = activityMainBinding.contactsListView
-
+        fillContacts()
         contactsListView.adapter = contactAdapter
 
         contactActivityResultLauncher = registerForActivityResult(
