@@ -23,10 +23,10 @@ class ContactActivity : AppCompatActivity() {
 
         with(contactActivityViewBinding) {
             saveBt.setOnClickListener {
-                val name = nameEt.toString()
-                val address = addressEt.toString()
-                val phone = phoneEt.toString()
-                val email = emailEt.toString()
+                val name = nameEt.text.toString()
+                val address = addressEt.text.toString()
+                val phone = phoneEt.text.toString()
+                val email = emailEt.text.toString()
 
                 val contact = Contact(generateId(), name, address, phone, email)
 
