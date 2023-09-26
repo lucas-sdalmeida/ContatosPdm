@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">araucaria</string>
+    <string name="app_name">ContatosPdm</string>
     <string name="contacts_list">Lista de contatos</string>
     <string name="contact">Contato</string>
     <string name="name">Name</string>
