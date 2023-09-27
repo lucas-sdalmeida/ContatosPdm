@@ -21,14 +21,26 @@ class ContactActivity : AppCompatActivity() {
         supportActionBar?.let{ it.subtitle = "Contact details" }
         val saveBt = contactActivityViewBinding.saveBt
 
+        val receivedContact = intent.getParcelableExtra<Contact>(Constants.EXTRA_CONTACT)
+
+        receivedContact?.let {
+            with(contactActivityViewBinding) {
+                nameEt.setText(it.name)
+                addressEt.setText(it.address)
+                phoneEt.setText(it.phone)
+                emailEt.setText(it.email)
+            }
+        }
+
         with(contactActivityViewBinding) {
             saveBt.setOnClickListener {
                 val name = nameEt.text.toString()
                 val address = addressEt.text.toString()
                 val phone = phoneEt.text.toString()
                 val email = emailEt.text.toString()
+                val id = receivedContact?.id ?: generateId()
 
-                val contact = Contact(generateId(), name, address, phone, email)
+                val contact = Contact(id, name, address, phone, email)
 
                 val resultIntent = Intent()
                 resultIntent.putExtra(Constants.EXTRA_CONTACT, contact)
