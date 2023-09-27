@@ -9,19 +9,17 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.lucassdalmeida.araucaria.R
+import com.lucassdalmeida.araucaria.adapter.ContactAdapter
 import com.lucassdalmeida.araucaria.databinding.ActivityMainBinding
 import com.lucassdalmeida.araucaria.model.Constants.EXTRA_CONTACT
 import com.lucassdalmeida.araucaria.model.Contact
-
-// ContatosPdm
 
 class MainActivity : AppCompatActivity() {
     private val activityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
     private val contactAdapter by lazy {
-        ArrayAdapter(this, android.R.layout.simple_list_item_1,
-            contactList.map { it.name })
+        ContactAdapter(this, contactList)
     }
     private val contactList : MutableList<Contact> = mutableListOf()
     private lateinit var contactActivityResultLauncher: ActivityResultLauncher<Intent>
@@ -37,12 +35,11 @@ class MainActivity : AppCompatActivity() {
 
         contactActivityResultLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
-        ) {result ->
+        ) { result ->
             if (result.resultCode == RESULT_OK) {
                 val contact = result.data?.getParcelableExtra<Contact>(EXTRA_CONTACT)
                 contact?.let {
                     contactList.add(it)
-                    contactAdapter.add(it.name)
                     contactAdapter.notifyDataSetChanged()
                 }
             }
