@@ -2,9 +2,11 @@ package com.lucassdalmeida.araucaria.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.lucassdalmeida.araucaria.databinding.ActivityContactBinding
 import com.lucassdalmeida.araucaria.model.Constants
+import com.lucassdalmeida.araucaria.model.Constants.VIEW_CONTACT
 import com.lucassdalmeida.araucaria.model.Contact
 import kotlin.random.Random
 
@@ -29,6 +31,16 @@ class ContactActivity : AppCompatActivity() {
                 addressEt.setText(it.address)
                 phoneEt.setText(it.phone)
                 emailEt.setText(it.email)
+
+                val viewContact = intent.getBooleanExtra(VIEW_CONTACT, false)
+
+                if (viewContact) {
+                    nameEt.isEnabled = false
+                    addressEt.isEnabled = false
+                    phoneEt.isEnabled = false
+                    emailEt.isEnabled = false
+                    saveBt.visibility = View.GONE
+                }
             }
         }
 

@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView.AdapterContextMenuInfo
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,6 +15,7 @@ import com.lucassdalmeida.araucaria.R
 import com.lucassdalmeida.araucaria.adapter.ContactAdapter
 import com.lucassdalmeida.araucaria.databinding.ActivityMainBinding
 import com.lucassdalmeida.araucaria.model.Constants.EXTRA_CONTACT
+import com.lucassdalmeida.araucaria.model.Constants.VIEW_CONTACT
 import com.lucassdalmeida.araucaria.model.Contact
 
 class MainActivity : AppCompatActivity() {
@@ -53,6 +53,14 @@ class MainActivity : AppCompatActivity() {
                     contactAdapter.notifyDataSetChanged()
                 }
             }
+        }
+
+        contactsListView.setOnItemClickListener { parent, view, position, id ->
+            val contact = contactList[position]
+            val viewContactIntent = Intent(this, ContactActivity::class.java)
+            viewContactIntent.putExtra(EXTRA_CONTACT, contact)
+            viewContactIntent.putExtra(VIEW_CONTACT, true)
+            startActivity(viewContactIntent)
         }
 
         registerForContextMenu(activityMainBinding.contactsListView)
